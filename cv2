@@ -10,6 +10,8 @@ orgX = 50, 80
 orgY = 50, 120
 
 vid = cv2.VideoCapture(0)
+
+
   
 while(True):
       
@@ -23,10 +25,14 @@ while(True):
             mpDraw.draw_landmarks(frame, h, mp_Hands.HAND_CONNECTIONS)
 
         index_finger_x = multiLandMarks[0].landmark[8].x
-        index_finger_y = multiLandMarks[0].landmark[8].x
-
-        cv2.putText(frame, str(index_finger_x), orgX, cv2.FONT_HERSHEY_SIMPLEX , 1, color, 2)
-        cv2.putText(frame, str(index_finger_y), orgY, cv2.FONT_HERSHEY_SIMPLEX , 1, color, 2)
+        index_finger_y = multiLandMarks[0].landmark[8].y
+        index_finger_5 = multiLandMarks[0].landmark[5].y
+        cv2.putText(frame, "x=%.2f" %index_finger_x, orgX, cv2.FONT_HERSHEY_SIMPLEX , 1, color, 2)
+        cv2.putText(frame, "y=%.2f" %index_finger_y, orgY, cv2.FONT_HERSHEY_SIMPLEX , 1, color, 2)
+        if index_finger_5 > index_finger_y:
+            cv2.putText(frame, "open",(100,150), cv2.FONT_HERSHEY_SIMPLEX , 1, color, 2)
+        else:
+            cv2.putText(frame, "close",(100,150), cv2.FONT_HERSHEY_SIMPLEX , 1, color, 2)
 
 
     if ret == False:
